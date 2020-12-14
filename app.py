@@ -16,14 +16,9 @@ import requests
 from io import StringIO
 
 # Get the data from url and request it as json file
-original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
-file_id = original_url.split('/')[-2]
-dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
-url = requests.get(dwn_url).text
-path = StringIO(url)
 #path = 'https://drive.google.com/uc?export=download&id='+URL.split('/')[-2]
 
-@st.cache(persist=True, suppress_st_warning=True)
+#@st.cache(persist=True, suppress_st_warning=True)
 def load_data(path):
     df = pd.read_csv(path)
     return df
@@ -56,6 +51,12 @@ def display_map(point, df):
 	return st.markdown(m._repr_html_(), unsafe_allow_html=True)
 
 def main():
+	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
+	file_id = original_url.split('/')[-2]
+	dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
+	url = requests.get(dwn_url).text
+	path = StringIO(url)
+
 	df_data = load_data(path)
 	st.header("Black Carbon and Nitrogen Dioxide Concentration")
 	st.subheader("Oakland and San Leandro")
