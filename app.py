@@ -48,7 +48,7 @@ def display_map(point, df):
                     round(df.loc[spatial.KDTree(df[['Latitude', 'Longitude']]).query(point)[1]]['NO2_Predicted_XGB'],2)),
                   icon=folium.Icon()).add_to(m)
 	
-	return st.markdown(m._repr_html_(height = 5), unsafe_allow_html=True)
+	return st.markdown(m._repr_html_(), unsafe_allow_html=True)
 
 def main():
 	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
