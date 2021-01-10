@@ -19,6 +19,7 @@ from io import StringIO
 #path = 'https://drive.google.com/uc?export=download&id='+URL.split('/')[-2]
 
 #@st.cache(persist=True, suppress_st_warning=True)
+@st.cache
 def load_data(path):
     df = pd.read_csv(path)
     return df
@@ -37,7 +38,7 @@ def convert_address(address):
 
 
 def display_map(point, df):
-	m = folium.Map(point, tiles='stamentoner', zoom_start=12)
+	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=12)
     # Add marker for Location
 	folium.Marker(location=point,
     popup="""
