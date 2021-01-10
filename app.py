@@ -20,9 +20,14 @@ from io import StringIO
 
 #@st.cache(persist=True, suppress_st_warning=True)
 @st.cache
-def load_data(path):
-    df = pd.read_csv(path)
-    return df
+def load_data():
+	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
+	file_id = original_url.split('/')[-2]
+	dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
+	url = requests.get(dwn_url).text
+	path = StringIO(url)
+	df = pd.read_csv(path)
+	return df
 
 
 def convert_address(address):
@@ -52,13 +57,7 @@ def display_map(point, df):
 	return st.markdown(m._repr_html_(), unsafe_allow_html=True)
 
 def main():
-	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
-	file_id = original_url.split('/')[-2]
-	dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
-	url = requests.get(dwn_url).text
-	path = StringIO(url)
-
-	df_data = load_data(path)
+	df_data = load_data()
 	st.header("Black Carbon and Nitrogen Dioxide Concentration")
 	st.subheader("Oakland and San Leandro")
 	address = st.text_input("Enter an address", "900 Fallon St, Oakland, CA 94607")
