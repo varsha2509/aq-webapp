@@ -25,6 +25,7 @@ import json
 
 #@st.cache(persist=True, suppress_st_warning=True)
 @st.cache
+### This function reads a csv file which contains a list of concentrations by latitude and longitude
 def load_data():
 	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
 	file_id = original_url.split('/')[-2]
@@ -34,9 +35,9 @@ def load_data():
 	df = pd.read_csv(path)
 	return df
 
-
+# This function loads a geoJSON file with Oakland city boundary.
 def load_oakl_data():
-	original_url_oakl = "https://drive.google.com/file/d/1POYKv96TGerxDQ7n4PwRQu3DaftIf8Mf/view?usp=sharing"
+	original_url_oakl = "https://drive.google.com/file/d/1I008pOw0Qz0ARNVC8eBqhEt325DDU_yq/view?usp=sharing"
 	file_id_oakl = original_url_oakl.split('/')[-2]
 	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
 	url_oakl = requests.get(dwn_url_oakl).content
@@ -57,13 +58,13 @@ def convert_address(address):
 
 
 def display_map(point, df, oakl_geo):
-	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=12)
+	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=15)
 
 	# Add polygon boundary to folium map
 	_, oakl_json = load_oakl_data()
 	oakl_json = oakl_json.decode("utf-8")
 	oakl_geojson = json.loads(oakl_json)
-	folium.GeoJson(oakl_geojson, style_function = lambda x: {'color': 'black','weight': 2.5,'fillOpacity': 0},
+	folium.GeoJson(oakl_geojson, style_function = lambda x: {'color': 'blue','weight': 2.5,'fillOpacity': 0},
     name='Oakland').add_to(m)
 
 
