@@ -18,6 +18,8 @@ import requests
 from io import StringIO
 from io import BytesIO
 
+
+import json
 # Get the data from url and request it as json file
 #path = 'https://drive.google.com/uc?export=download&id='+URL.split('/')[-2]
 
