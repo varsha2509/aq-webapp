@@ -39,7 +39,7 @@ def load_oakl_data():
 	url_oakl = requests.get(dwn_url_oakl).text
 	path_oakl = StringIO(url_oakl)
 	print(path_oakl)
-	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON')
+	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 	return oakl_geo
 
 def convert_address(address):
