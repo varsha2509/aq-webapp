@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd 
 
+import geopandas as gpd
+
 import folium 
 from folium import Marker
 from folium.plugins import MarkerCluster
@@ -30,6 +32,15 @@ def load_data():
 	return df
 
 
+def load_oakl_data():
+	original_url_oakl = "https://drive.google.com/file/d/1POYKv96TGerxDQ7n4PwRQu3DaftIf8Mf/view?usp=sharing"
+	file_id_oakl = original_url.split('/')[-2]
+	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
+	url_oakl = requests.get(dwn_url_oakl).text
+	path_oakl = StringIO(url_oakl)
+	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON')
+	return oakl_geo
+
 def convert_address(address):
 
 	#Here we use openstreetmap's Nominatin to convert address to a latitude/longitude coordinates"
@@ -42,8 +53,14 @@ def convert_address(address):
 	return point
 
 
-def display_map(point, df):
+def display_map(point, df, oakl_geo):
 	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=12)
+
+	# Add polygon boundary to folium map
+	folium.GeoJson(load_oakl_data, style_function = lambda x: {'color': 'black','weight': 2.5,'fillOpacity': 0},
+    name='Oakland').add_to(m)
+
+
     # Add marker for Location
 	folium.Marker(location=point,
     popup="""
