@@ -62,7 +62,7 @@ def display_map(point, df, oakl_geo):
 	# Add polygon boundary to folium map
 	_, oakl_json = load_oakl_data()
 	oakl_json = oakl_json.decode("utf-8")
-	oakl_geojson = json.load(oakl_json)
+	oakl_geojson = json.loads(oakl_json)
 	folium.GeoJson(oakl_geojson, style_function = lambda x: {'color': 'black','weight': 2.5,'fillOpacity': 0},
     name='Oakland').add_to(m)
 
