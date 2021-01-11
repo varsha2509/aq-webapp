@@ -58,7 +58,7 @@ def convert_address(address):
 
 
 def display_map(point, df, oakl_geo):
-	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=15)
+	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=5)
 
 	# Add polygon boundary to folium map
 	_, oakl_json = load_oakl_data()
