@@ -16,6 +16,7 @@ from scipy import spatial
 
 import requests
 from io import StringIO
+from io import BytesIO
 
 # Get the data from url and request it as json file
 #path = 'https://drive.google.com/uc?export=download&id='+URL.split('/')[-2]
@@ -37,7 +38,7 @@ def load_oakl_data():
 	file_id_oakl = original_url_oakl.split('/')[-2]
 	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
 	url_oakl = requests.get(dwn_url_oakl).content
-	path_oakl = StringIO(url_oakl.read().decode('utf-8')) 
+	path_oakl = BytesIO(url_oakl) 
 	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 	return oakl_geo
 
