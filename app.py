@@ -83,8 +83,8 @@ def display_map(point, df, oakl_geo):
 def main():
 	df_data = load_data()
 	oak_data,_ = load_oakl_data()
-	st.header("Black Carbon and Nitrogen Dioxide Concentration")
-	st.subheader("Oakland and San Leandro")
+	st.header("Air Quality Concentrations")
+	st.subheader("This app reports the concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro. Enter an address below.")
 	address = st.text_input("Enter an address", "900 Fallon St, Oakland, CA 94607")
 
 	# if st.checkbox("show first rows of the data & shape of the data"):
