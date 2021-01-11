@@ -87,7 +87,7 @@ def main():
 	st.subheader("Hello! This website reports concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro.")
 	address = st.text_input("Enter an address or point of interest below.", "900 Fallon St, Oakland, CA 94607")
 
-	st.subheader("Created by - Varsha - https://www.linkedin.com/in/varshagopalakrishnan/")
+	st.text("Created by - Varsha - https://www.linkedin.com/in/varshagopalakrishnan/")
 
 	# if st.checkbox("show first rows of the data & shape of the data"):
 	# 	st.write(df_data.head(10))
