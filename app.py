@@ -85,7 +85,7 @@ def main():
 	oak_data,_ = load_oakl_data()
 	st.header("Predicting Air Quality in East Bay Area")
 	st.subheader("Hello! This website reports concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro.")
-	address = st.text_input("Enter an address or point of interest below.", "  ")
+	address = st.text_input("Enter an address or point of interest below.", "900 Fallon St, Oakland, CA 94607")
 
 	st.text("Created by - Varsha - https://www.linkedin.com/in/varshagopalakrishnan/")
 
