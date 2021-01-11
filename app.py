@@ -39,6 +39,7 @@ def load_oakl_data():
 	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
 	url_oakl = requests.get(dwn_url_oakl).content
 	path_oakl = BytesIO(url_oakl) 
+	print(path_oakl)
 	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 	return oakl_geo
 
