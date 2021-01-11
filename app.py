@@ -39,7 +39,6 @@ def load_oakl_data():
 	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
 	url_oakl = requests.get(dwn_url_oakl).content
 	path_oakl = BytesIO(url_oakl) 
-	print(path_oakl)
 	oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 	return oakl_geo
 
@@ -59,7 +58,8 @@ def display_map(point, df, oakl_geo):
 	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=12)
 
 	# Add polygon boundary to folium map
-	folium.GeoJson(load_oakl_data, style_function = lambda x: {'color': 'black','weight': 2.5,'fillOpacity': 0},
+	oakl_geojson = json.load(open(load_oakl_data))
+	folium.GeoJson(oakl_geojson, style_function = lambda x: {'color': 'black','weight': 2.5,'fillOpacity': 0},
     name='Oakland').add_to(m)
 
 
