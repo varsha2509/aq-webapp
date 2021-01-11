@@ -75,6 +75,7 @@ def display_map(point, df, oakl_geo):
 
 def main():
 	df_data = load_data()
+	oak_data = load_oakl_data()
 	st.header("Black Carbon and Nitrogen Dioxide Concentration")
 	st.subheader("Oakland and San Leandro")
 	address = st.text_input("Enter an address", "900 Fallon St, Oakland, CA 94607")
@@ -85,7 +86,7 @@ def main():
 	
 	coordinates = convert_address(address)
 		
-	display_map(coordinates, df_data)
+	display_map(coordinates, df_data, oak_data)
   
 if __name__ == "__main__":
     main()
