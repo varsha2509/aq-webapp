@@ -71,8 +71,8 @@ def display_map(point, df, oakl_geo):
     # Add marker for Location
 	folium.Marker(location=point,
     popup="""
-                  <i>BC Concentration: </i> <br> <b>{}</b> ug/m3 <br> 
-                  <i>NO2 Concentration: </i><b><br>{}</b> ppb <br>
+                  <i>BC Concentration: </i> <br> <b>{}</b> ug/m3 <br> <hr>
+                  <i>NO<sub>2</sub> Concentration: </i><b><br>{}</b> ppb <br>
                   """.format(
                     round(df.loc[spatial.KDTree(df[['Latitude', 'Longitude']]).query(point)[1]]['BC_Predicted_XGB'],2), 
                     round(df.loc[spatial.KDTree(df[['Latitude', 'Longitude']]).query(point)[1]]['NO2_Predicted_XGB'],2)),
@@ -84,7 +84,9 @@ def main():
 	df_data = load_data()
 	oak_data,_ = load_oakl_data()
 	st.header("Predicting Air Quality in East Bay Area")
-	st.subheader("Hello! This website reports concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro.")
+	st.text("")
+	st.subheader("This website reports annual average concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro.")
+	st.text("")
 	address = st.text_input("Enter an address or point of interest below.", "900 Fallon St, Oakland, CA 94607")
 
 
@@ -94,8 +96,10 @@ def main():
 	
 	coordinates = convert_address(address)
 		
+	st.text("")
 	display_map(coordinates, df_data, oak_data)
 
+	st.text("")
 	st.text("Created by - Varsha - https://www.linkedin.com/in/varshagopalakrishnan/")
 
   
