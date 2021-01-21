@@ -42,18 +42,19 @@ def load_oakl_data():
 	file_id_oakl = original_url_oakl.split('/')[-2]
 	dwn_url_oakl = 'https://drive.google.com/uc?export=download&id=' + file_id_oakl
 	url_oakl = requests.get(dwn_url_oakl).content
-	#path_oakl = BytesIO(url_oakl) 
-	#oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 	return url_oakl
 
-def convert_address(address):
+	#path_oakl = BytesIO(url_oakl) 
+	#oakl_geo = gpd.read_file(path_oakl, driver = 'GeoJSON',encoding="utf-8")
 
-	#Here we use openstreetmap's Nominatin to convert address to a latitude/longitude coordinates"
+
+def convert_address(address):
+	#Here we use Nominatin to convert address to a latitude/longitude coordinates"
 	geolocator = Nominatim(user_agent="my_app") #using open street map API 
 	Geo_Coordinate = geolocator.geocode(address)
 	lat = Geo_Coordinate.latitude
 	lon = Geo_Coordinate.longitude
-	#Convert the lat long into a list and store is as points
+	#Convert the lat long into a list and store is as point
 	point = [lat, lon]
 	return point
 
@@ -62,7 +63,6 @@ def display_map(point, df, oakl_geojson):
 	m = folium.Map(point, tiles='OpenStreetMap', zoom_start=11)
 
 	# Add polygon boundary to folium map
-
 	folium.GeoJson(oakl_geojson, style_function = lambda x: {'color': 'blue','weight': 2.5,'fillOpacity': 0},
 	name='Oakland').add_to(m)
 
@@ -80,26 +80,25 @@ def display_map(point, df, oakl_geojson):
 	return st.markdown(m._repr_html_(), unsafe_allow_html=True)
 
 def main():
+	#Load csv data
 	df_data = load_data()
 	
+	#Load geoJSON file using json.loadas
 	oakl_json = load_oakl_data()
 	oakl_json = oakl_json.decode("utf-8")
 	oakl_geojson = json.loads(oakl_json)
 
-
-	st.header("Predicting Air Quality in East Bay Area")
+	#For the page display, create headers and subheader, and get an input address from the user
+	st.header("Predicting Air Quality in Oakland, California")
 	st.text("")
-	st.subheader("This website reports annual average concentrations of Black Carbon and Nitrogen Dioxide in Oakland and San Leandro.")
+	st.subheader("This website reports annual average concentrations of Black Carbon and Nitrogen Dioxide in Oakland.")
 	st.text("")
 	address = st.text_input("Enter an address or point of interest below.", "900 Fallon St, Oakland, CA 94607")
 
-
-	# if st.checkbox("show first rows of the data & shape of the data"):
-	# 	st.write(df_data.head(10))
-	# 	st.write(df_data.shape)
-	
+	# Use the convert_address function to convert address to coordinates
 	coordinates = convert_address(address)
-		
+	
+	#Call the display_map function by passing coordinates, dataframe and geoJSON file	
 	st.text("")
 	display_map(coordinates, df_data, oakl_geojson)
 
