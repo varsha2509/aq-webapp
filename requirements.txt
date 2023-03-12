@@ -1,8 +1,8 @@
-streamlit==0.72.0
-pandas==0.25.2
-folium==0.10.1
-branca==0.3.1
-geopandas==0.8.0
+folium==0.12.1
+requests==2.22.0
+geopandas==0.6.1
 geopy==1.21.0
 scipy==1.4.1
-requests==2.22.0
+streamlit==0.72.0
+pandas==1.2.1
+branca==0.3.1
