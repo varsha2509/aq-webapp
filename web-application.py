@@ -25,7 +25,7 @@ import json
 
 # Get the data from url and request it as json file
 
-@st.cache
+@st.cache_data
 ### This function reads a csv file which contains a list of concentrations by latitude and longitude
 def load_data():
 	original_url = "https://drive.google.com/file/d/1keCA9T8f_wIxjtdgjzQY9kzYX9bppCqs/view?usp=sharing"
