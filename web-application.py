@@ -1,17 +1,13 @@
-#Import streamlit pandas and geopandas
 import streamlit as st
 import pandas as pd 
 import geopandas as gpd
 
-#Import folium and related plugins
 import folium 
 from folium import Marker
 from folium.plugins import MarkerCluster
 
-#Geopy's Nominatim
 from geopy.geocoders import Nominatim
 
-#Scipy's Spatial
 from scipy import spatial
 
 
@@ -114,9 +110,9 @@ def main():
 
 
 	st.text("")
-	mediumlink = """ <a href ="https://varsha-gopalakrishnan.medium.com/hyperlocal-air-quality-prediction-using-machine-learning-ed3a661b9a71">@Medium</a> """
+	tdslink = """ <a href ="https://towardsdatascience.com/hyperlocal-air-quality-prediction-using-machine-learning-ed3a661b9a71/">@Towards Data Science</a> """
 	st.markdown('<p> Check out this blog to learn more about how the machine learning models were developed. </p>', unsafe_allow_html = True)
-	st.markdown(mediumlink, unsafe_allow_html=True)
+	st.markdown(tdslink, unsafe_allow_html=True)
 	st.text("")
 	linkedinlink = """ <a href="https://www.linkedin.com/in/varshagopalakrishnan/">@LinkedIn</a> """
 	st.markdown('<p class = "small-font">  Created by - Varsha Gopalakrishnan </p>', unsafe_allow_html=True)
